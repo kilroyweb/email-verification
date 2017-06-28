@@ -66,3 +66,57 @@ class VerificationController extends Controller
 }
 
 ```
+
+Create a mailable (app/Mail/EmailVerification.php) that is triggered during "requestEmailVerification()"
+
+```php
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class EmailVerification extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $verifiableModel;
+
+    public function __construct($verifiableModel)
+    {
+        $this->verifiableModel = $verifiableModel;
+    }
+
+    /**
+     *
+     *Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        $verifiableModel = $this->verifiableModel;
+        $this->to($verifiableModel->email);
+        return $this->view('email.email-verification.create',[
+            'verifiableModel'=>$verifiableModel,
+        ]);
+    }
+}
+```
+
+And view (email.email-verification.create):
+
+```php
+@extends('layouts.email.app')
+
+@section('content')
+
+    <h2>Click here to verify your email address:</h2>
+
+    <p><a href="{{ url('/email/verification/'.$verifiableModel->getEmailVerificationToken()) }}">Verify My Email</a></p>
+
+@endsection
+
+```
