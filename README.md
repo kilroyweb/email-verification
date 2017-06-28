@@ -120,3 +120,16 @@ And view (email.email-verification.create):
 @endsection
 
 ```
+
+In your register controller, call the requestEmailVerification() method to send verification on register:
+
+```php
+protected function create(array $data)
+    {
+        $user = User::create([
+            ...
+        ]);
+        $user->requestEmailVerification();
+        return $user;
+    }
+```
