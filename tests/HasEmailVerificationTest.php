@@ -6,6 +6,7 @@ class HasEmailVerificationTest extends TestCase{
 
     public function testFindByEmailVerificationToken()
     {
+        //TODO
         $this->markTestIncomplete();
     }
 
