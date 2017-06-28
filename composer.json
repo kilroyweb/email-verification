@@ -1,0 +1,13 @@
+{
+    "name": "kilroyweb/email-verification",
+    "description": "Support for verifying user email",
+    "keywords": ["laravel"],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+        "psr-4": {
+            "KilroyWeb\\EmailVerification\\": "src"
+        }
+    }
+}
